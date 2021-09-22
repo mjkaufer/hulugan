@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #11998e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #11998e, #2bd86d); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #11998e, #2bd86d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #212e3c;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+div.cute-as-a {
+  /* background:white; */
+  color:black;
+  transition:0.4s;
+  transform: perspective(1px) translateZ(0);
+  text-align: center;
+  padding:0.5em 30px;
+  margin: 0.5em;
+  border: solid #1fbc7c 0.125em;
+  color:black;
+  border-radius: 0.5em;
+  display: inline-block;
+  overflow:hidden;
+  transition: all 0.4s cubic-bezier(.86,.01,.15,.99);
+  position: relative;
+  cursor: pointer;
+}
+div.cute-as-a:hover {
+  color:white;
+  box-shadow: 0 0 0 0.5em rgba(250,250,250,0.1)
+}
+div.cute-as-a::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0;
+  clip-path: circle(0.5% at 50% 50%);
+  background:#1fbc7c;
+  transition:0.4s;
+  opacity:1;
+}
+div.cute-as-a:hover::before {
+  clip-path: circle(100% at 50% 50%);
+}
