@@ -9,6 +9,7 @@ body {
   background: -webkit-linear-gradient(to right, #11998e, #2bd86d); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #11998e, #2bd86d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #212e3c;
+  overflow-x: hidden;
 }
 
 code {
@@ -24,6 +25,7 @@ div.flexseal {
   display: flex;
   margin: 0 auto;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 div.show {
@@ -31,9 +33,12 @@ div.show {
   border: solid #1fbc7c 0.1875em;
   border-radius: 0.5em;
   padding: 0.5em;
-  padding-top: 0;
   transition: 0.25s all;
   cursor: pointer;
+}
+
+div.endorsed {
+  background-color: #d4ffee;
 }
 
 div.show:hover {

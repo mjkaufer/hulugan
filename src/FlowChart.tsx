@@ -63,7 +63,7 @@ function FlowChart() {
         </div>
 
         {hasEndorsed && (
-          <p>Psst: If a show has a 💫 next to it, that means Matt has seen some (or all) of this show, and highly recommends it / would be super down to watch it again!</p>
+          <p>Psst: If a show has a light green background, that means Matt has seen some (or all) of this show, and highly recommends it / would be super down to watch it again!</p>
         )}
       </div>
     )
@@ -88,9 +88,8 @@ function Show(props: {show: IShow}) {
     window.open(props.show.url, '_blank');
   }, [props.show.url])
   return (
-    <div className="show" onClick={open}>
-      <h3>{props.show.name} {props.show.endorsed ? `💫` : ``}</h3>
-      <img src={props.show.imageUrl}/>
+    <div className={`show ${props.show.endorsed ? 'endorsed' : ''}`} onClick={open}>
+      <img src={props.show.imageUrl} alt={props.show.name}/>
       {props.show.description ?? null}
     </div>
   )
