@@ -16,6 +16,34 @@ code {
   monospace;
 }
 
+div.stout {
+  max-width: 8em;
+}
+
+div.flexseal {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+div.show {
+  margin: 1em;
+  border: solid #1fbc7c 0.1875em;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  padding-top: 0;
+  transition: 0.25s all;
+  cursor: pointer;
+}
+
+div.show:hover {
+  transform: rotate(2.5deg) scale(1.025);
+}
+
+div.show img {
+  border-radius: 0.25em;
+}
+
 div.cute-as-a {
   /* background:white; */
   color:black;
