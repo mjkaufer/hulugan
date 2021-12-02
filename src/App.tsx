@@ -2,11 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Splash } from './Splash';
 import { Messages } from './Messages';
-
-enum PageState {
-  Welcome = 'welcome',
-  FlowChart = 'flowChart',
-}
+import { Competition } from './Competition';
+import { EmojiRanking } from './EmojiRanking';
+import { HashtagRanking } from './HashtagRanking';
 
 const useStyles = makeStyles({
   container: {
@@ -20,9 +18,12 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   return (
-    <div className={`${classes.container}`}>
+    <div className={classes.container}>
       <Splash/>
       <Messages/>
+      <Competition/>
+      <HashtagRanking/>
+      <EmojiRanking/>
     </div>
   )
 }

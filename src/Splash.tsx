@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 export function Splash() {
   const classes = useStyles();
   return (
-    <section>
+    <section className="center">
       <h1 className={classes.h1}>Matt &amp; Cat</h1>
       <h2>2021 <span className={`${classes.wrapped} wrapped`}>Wrapped</span></h2>
       <h6>Sponsored by Trojan</h6>

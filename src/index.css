@@ -25,7 +25,6 @@ section {
   overflow: hidden;
   font-size: 1.5em;
   height: 100%;
-  text-align: center;
 }
 
 code {
@@ -35,6 +34,10 @@ code {
 
 div.stout {
   max-width: 8em;
+}
+
+div.flex {
+  display: flex;
 }
 
 div.flexseal {
@@ -51,6 +54,10 @@ div.show {
   padding: 0.5em;
   transition: 0.25s all;
   cursor: pointer;
+}
+
+.center {
+  text-align: center;
 }
 
 div.endorsed {
@@ -130,3 +137,10 @@ div.cute-as-a:hover::before {
   background: #ccccff;
 }
 
+.matt {
+  color: #148c94;
+}
+
+.caitlin {
+  color: #4747df;
+}

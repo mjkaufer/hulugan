@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { IPerPersonData } from './dataTypes';
 
 export function padLeft(input: string | number, paddingChar: string, minLength: number): string {
   let base = input.toString();
@@ -49,6 +50,26 @@ export function extractHashtagsFromString(c: string): string[] {
   while (!nextVal.done) {
     const value = nextVal.value[0];
     if (value.length > 2) {
+      out.push(value)
+    }
+    nextVal = iterator.next();
+  }
+
+  return out;
+}
+
+const BORING_WORDS: string[] = []
+
+export function extractWordsFromString(c: string): string[] {
+  // @ts-ignore TODO use later compiler version
+  const iterator = c.matchAll(/[A-Za-z]*/ugi)
+
+  const out: string[] = [];
+
+  let nextVal = iterator.next();
+  while (!nextVal.done) {
+    const value = nextVal.value[0];
+    if (value.length > 2 && !BORING_WORDS.includes(value)) {
       out.push(value)
     }
     nextVal = iterator.next();
@@ -118,4 +139,40 @@ export function commaFormat(_num: number): string {
   }
 
   return output;
+}
+
+interface IPersonResults {
+  name: 'matt' | 'caitlin';
+  value: number;
+}
+
+export interface ISortedPersonResults {greater: IPersonResults, lesser: IPersonResults}
+
+export function sortPersonData(data: IPerPersonData<number>): ISortedPersonResults {
+  const matt: IPersonResults = {
+    name: 'matt',
+    value: data.matt,
+  };
+  const cat: IPersonResults = {
+    name: 'caitlin',
+    value: data.cat,
+  };
+
+  if (data.matt > data.cat) {
+    return {greater: matt, lesser: cat}
+  } else {
+    return {greater: cat, lesser: matt}
+  }
+}
+
+interface IFreqCount {
+  value: string;
+  count: number;
+}
+export function getSortedFreqMap(freqMap: Record<string, number>, n: number = 10): IFreqCount[] {
+  const countEmoji = _.map(freqMap, (count, value) => ({value, count}));
+
+  const sortedEmoji = _.sortBy(countEmoji, e => -e.count);
+
+  return n > 0 ? sortedEmoji.slice(0, n) : sortedEmoji;
 }

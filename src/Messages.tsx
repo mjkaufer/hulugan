@@ -5,16 +5,8 @@ import { numDayDiff, commaFormat } from './helpers';
 
 
 const useStyles = makeStyles({
-  wrapped: {
-    background: '#ccccff',
-    padding: '0.5em',
-    borderRadius: '0 1em 1em 0',
-  },
   h1: {
     fontSize: '2em',
-  },
-  pic: {
-    width: '12em',
   },
   num: {
     textDecoration: 'underline',
@@ -38,13 +30,13 @@ export function Messages() {
   const numDaysSinceText = numDayDiff(new Date(), new Date(data.firstMessageDate));
 
   return (
-    <section>
+    <section className="center">
       <h1 className={classes.h1}>Y'all Must Really Like Each Other</h1>
 
       <p>You matched with Matt on Hinge <Num n={numDaysSinceMatch}/> days ago</p>
       <p>And you oh-so-graciously gave Matt your number <Num n={numDaysSinceText}/> days ago</p>
 
-      <p>And in those <Num n={numDaysSinceText}/> days, y'all have...</p>
+      <p>In those <Num n={numDaysSinceText}/> short days, y'all have...</p>
 
       <hr/>
 
@@ -59,8 +51,14 @@ export function Messages() {
       </p>
 
       <p>
-        😎 Used <Num n={data.numEmoji}/> Emoji
+        🔡 Typed <Num n={data.numWords.matt + data.numWords.cat}/> Words
       </p>
+
+      <p>
+        😎 Used <Num n={data.numEmoji.matt + data.numEmoji.cat}/> Emoji
+      </p>
+
+      <p>❤️ And made each other laugh innumerable times</p>
       
     </section>
   )

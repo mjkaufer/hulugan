@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as _ from 'lodash';
 import { IPerPersonData, IScrapedDataJSON } from '../dataTypes';
-import { buildMessages, IMessage, extractEmojiFromString, extractHashtagsFromString, extractNewLinesFromString, freqMap } from '../helpers';
+import { buildMessages, IMessage, extractEmojiFromString, extractHashtagsFromString, extractNewLinesFromString, extractWordsFromString, freqMap } from '../helpers';
 
 import { CSVToArray } from './lib';
 
@@ -25,6 +25,10 @@ function getHashtagsFromMessages(messages: IMessage[]): string[] {
   return _.flatten(messages.map(m => extractHashtagsFromString(m.message)));
 }
 
+function getWordsFromMessages(messages: IMessage[]): string[] {
+  return _.flatten(messages.map(m => extractWordsFromString(m.message)));
+}
+
 
 function getNewLinesFromMessages(messages: IMessage[]): number {
   return _.sum(messages.map(m => extractNewLinesFromString(m.message)));
@@ -33,6 +37,7 @@ function getNewLinesFromMessages(messages: IMessage[]): number {
 function getNumWordsFromMessages(messages: IMessage[]): number {
   return _.sum(messages.map(m => m.message.split(' ').map(w => w.trim()).filter(w => w).length));
 }
+
 
 function catMattIterator<T>(iterator: (messages: IMessage[]) => T): IPerPersonData<T> {
 
@@ -43,17 +48,18 @@ function catMattIterator<T>(iterator: (messages: IMessage[]) => T): IPerPersonDa
 }
 
 const numHulu = _.uniqBy(catMessages.filter(c => c.message.includes('hulu.com') && c.message.includes('/coviewing')), m => m.parsedDate).length;
-const numEmoji = getEmojiFromMessages(messages).length;
 
 function createMetrics(): IScrapedDataJSON {
   return {
     emojiCounts: catMattIterator(messages => freqMap(getEmojiFromMessages(messages))),
     hashtagCounts: catMattIterator(messages => freqMap(getHashtagsFromMessages(messages), _.toLower)),
+    wordCounts: catMattIterator(messages => freqMap(getWordsFromMessages(messages), _.toLower)),
     numMessages: catMattIterator(messages => messages.length),
     numNewLines: catMattIterator(messages => getNewLinesFromMessages(messages)),
     numWords: catMattIterator(messages => getNumWordsFromMessages(messages)),
     numHulu,
-    numEmoji,
+    numEmoji: catMattIterator(messages => getEmojiFromMessages(messages).length),
+    numHashtags: catMattIterator(messages => getHashtagsFromMessages(messages).length),
     hingeMatchDate: '2021-07-30',
     firstMessageDate: messages[0].parsedDate,
   }
