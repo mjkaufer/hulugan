@@ -74,7 +74,7 @@ export function EmojiRanking() {
 
       <div className="center">
 
-        <p>Last but not least – let's see what our fav emoji are</p>
+        <p>Last but not least – let's see what our fav emoji are 🕵️</p>
         <p><small>(and why they aren't 👶👸)</small></p>
       </div>
       
