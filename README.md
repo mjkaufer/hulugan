@@ -1,6 +1,6 @@
-# Hulugan
+# cat-matt-wrapped-2k21
 
-A lil Hulu recommendation SPA I made
+Christmas present :)))
 ## Available Scripts
 
 In the project directory, you can run:

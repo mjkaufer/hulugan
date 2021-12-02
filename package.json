@@ -1,5 +1,5 @@
 {
-  "name": "hulugan",
+  "name": "cat-matt-wrapped-2k21",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,11 +7,14 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/d3": "^7.1.0",
     "@types/jest": "^26.0.15",
     "@types/lodash": "^4.14.174",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "d3": "^7.1.1",
+    "emoji-regex": "^10.0.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -23,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf docs && mv build docs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "export": "tsc src/scripts/export.ts && node src/scripts/export.js && rm -rf *.js"
   },
   "homepage": "./",
   "eslintConfig": {

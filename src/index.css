@@ -4,12 +4,28 @@ body {
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #11998e; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #11998e, #2bd86d); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #11998e, #2bd86d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -moz-osx-font-smoothing: grayscale;  
   color: #212e3c;
   overflow-x: hidden;
+  background: #7070ed; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #7070ed, #8a51c2); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #7070ed, #8a51c2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100%;
+  margin: 0;
+}
+
+section {
+  min-height: calc(100vh - 8em);
+  margin: 2em;
+  padding: 2em;
+  border-radius: 1em;
+  border: solid white 2px;
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+
+  overflow: hidden;
+  font-size: 1.5em;
+  height: 100%;
+  text-align: center;
 }
 
 code {
@@ -86,3 +102,31 @@ div.cute-as-a::before {
 div.cute-as-a:hover::before {
   clip-path: circle(100% at 50% 50%);
 }
+
+.wrapped {
+  position: relative;
+  width: 100%;
+}
+
+.wrapped::before {
+  content: '';
+  position: absolute;
+  left: calc(100% - 0.125em);
+  top: calc(50% - 0.25em);
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0 50% 50% 0;
+  background: #ccccff;
+}
+
+.wrapped::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -0.25em;
+  width: 0.25em;
+  height: calc(100% + 0.5em);
+  border-radius: 0.25em;
+  background: #ccccff;
+}
+
