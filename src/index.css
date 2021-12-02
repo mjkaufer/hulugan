@@ -47,6 +47,10 @@ div.flexseal {
   flex-wrap: wrap;
 }
 
+.margin-center {
+  margin: 0 auto;
+}
+
 div.show {
   margin: 1em;
   border: solid #1fbc7c 0.1875em;
@@ -79,8 +83,7 @@ div.cute-as-a {
   transform: perspective(1px) translateZ(0);
   text-align: center;
   padding:0.5em 30px;
-  margin: 0.5em;
-  border: solid #1fbc7c 0.125em;
+  border: solid #7070ed 0.125em;
   color:black;
   border-radius: 0.5em;
   display: inline-block;
@@ -102,7 +105,7 @@ div.cute-as-a::before {
   right: 0px;
   bottom: 0;
   clip-path: circle(0.5% at 50% 50%);
-  background:#1fbc7c;
+  background:#7070ed;
   transition:0.4s;
   opacity:1;
 }

@@ -93,7 +93,7 @@ export function Competition() {
 
       <div>
         <p><b>😎 My emoji game...</b></p>
-        <Spoiler data={data.numEmoji} winWord='is the emoji bows' loseWord={'prefers the written word'} noun='emoji'/>
+        <Spoiler data={data.numEmoji} winWord='is the emoji böws 😤' loseWord={'prefers the written word'} noun='emoji'/>
       </div>
 
       <div>

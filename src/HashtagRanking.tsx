@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { makeStyles } from '@material-ui/styles';
 import {data} from './data';
-import { getSortedFreqMap, sortPersonData } from './helpers';
-import { Num } from './Messages';
+import { PerPersonRanking } from './EmojiRanking';
 
 
 const useStyles = makeStyles({
@@ -18,24 +17,6 @@ const useStyles = makeStyles({
   }
 });
 
-function EmojiRankingCol({rawHashtagCounts}: {rawHashtagCounts: Record<string, number>}) {
-  const hashtagCounts = useMemo(() => {
-    return getSortedFreqMap(rawHashtagCounts, 5)
-  }, [rawHashtagCounts])
-
-  return (
-    <div>
-      <ol>
-        {
-          hashtagCounts.map((hashtagCount, index) => (
-            <li key={index}>{hashtagCount.value} <small>(<Num n={hashtagCount.count}/> uses)</small></li>
-          ))
-        }
-      </ol>
-    </div>
-  )
-}
-
 export function HashtagRanking() {
   const classes = useStyles();
 
@@ -48,17 +29,7 @@ export function HashtagRanking() {
       <br/>
       <br/>
 
-      <div className='flexseal'>
-        <div className={classes.center}>
-          <h3 className={`matt center ${classes.center}`}>Matt</h3>
-          <EmojiRankingCol rawHashtagCounts={data.hashtagCounts.matt}/>
-        </div>
-        <div className={classes.center}>
-          <h3 className={`caitlin center ${classes.center}`}>Caitlin</h3>
-          <EmojiRankingCol rawHashtagCounts={data.hashtagCounts.cat}/>
-        </div>
-      </div>
-
+      <PerPersonRanking perPersonRawCounts={data.hashtagCounts} n={5}/>
     </section>
   )
 }

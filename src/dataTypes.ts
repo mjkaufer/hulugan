@@ -7,6 +7,7 @@ export interface IPerPersonData<T extends any = never> {
 export interface IScrapedDataJSON {
   emojiCounts: IPerPersonData<Record<string, number>>;
   hashtagCounts: IPerPersonData<Record<string, number>>;
+  interestingWordCounts: IPerPersonData<Record<string, number>>;
   wordCounts: IPerPersonData<Record<string, number>>;
   numMessages: IPerPersonData<number>;
   numWords: IPerPersonData<number>;

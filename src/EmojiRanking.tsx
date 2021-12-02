@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import {data} from './data';
 import { getSortedFreqMap, sortPersonData } from './helpers';
 import { Num } from './Messages';
+import { IPerPersonData } from './dataTypes';
 
 
 const useStyles = makeStyles({
@@ -18,21 +19,49 @@ const useStyles = makeStyles({
   }
 });
 
-function EmojiRankingCol({rawEmojiCounts}: {rawEmojiCounts: Record<string, number>}) {
+interface IRankingColProps {
+  rawCounts: Record<string, number>;
+  n?: number;
+  transformRow?: (w: string) => string;
+};
+function RankingCol({rawCounts, n = 10, transformRow = _.identity}: IRankingColProps) {
   const emojiCounts = useMemo(() => {
-    return getSortedFreqMap(rawEmojiCounts)
-  }, [rawEmojiCounts])
+    return getSortedFreqMap(rawCounts, n)
+  }, [rawCounts])
 
   return (
     <div>
       <ol>
         {
           emojiCounts.map((emojiCount, index) => (
-            <li key={index}>{emojiCount.value} <small>(<Num n={emojiCount.count}/> uses)</small></li>
+            <li key={index}>{transformRow(emojiCount.value)} <small>(<Num n={emojiCount.count}/> uses)</small></li>
           ))
         }
       </ol>
     </div>
+  )
+}
+
+interface IPerPersonRankingProps {
+  perPersonRawCounts: IPerPersonData<Record<string, number>>;
+  n?: number;
+  transformRow?: (w: string) => string;
+}
+
+export function PerPersonRanking({perPersonRawCounts, n, transformRow}: IPerPersonRankingProps) {
+  const classes = useStyles();
+  return (
+      <div className='flexseal'>
+        <div className={classes.center}>
+          <h3 className={`matt center ${classes.center}`}>Matt</h3>
+          <RankingCol rawCounts={perPersonRawCounts.matt} n={n} transformRow={transformRow}/>
+        </div>
+        <div className={classes.center}>
+          <h3 className={`caitlin center ${classes.center}`}>Caitlin</h3>
+          <RankingCol rawCounts={perPersonRawCounts.cat} n={n} transformRow={transformRow}/>
+        </div>
+      </div>
+
   )
 }
 
@@ -54,16 +83,7 @@ export function EmojiRanking() {
       <br/>
       <br/>
 
-      <div className='flexseal'>
-        <div className={classes.center}>
-          <h3 className={`matt center ${classes.center}`}>Matt</h3>
-          <EmojiRankingCol rawEmojiCounts={data.emojiCounts.matt}/>
-        </div>
-        <div className={classes.center}>
-          <h3 className={`caitlin center ${classes.center}`}>Caitlin</h3>
-          <EmojiRankingCol rawEmojiCounts={data.emojiCounts.cat}/>
-        </div>
-      </div>
+      <PerPersonRanking perPersonRawCounts={data.emojiCounts}/>
 
     </section>
   )

@@ -58,9 +58,29 @@ export function extractHashtagsFromString(c: string): string[] {
   return out;
 }
 
-const BORING_WORDS: string[] = []
+const BORING_WORDS: string[] = [
+  'the',
+  'you',
+  'but',
+  'for',
+  'and',
+  'that',
+  'was',
+  'are',
+  'this',
+  'can',
+  'also',
+  'your',
+  'have',
+  'what',
+  'some',
+  'get',
+  'too',
+  'there',
+  'like',
+];
 
-export function extractWordsFromString(c: string): string[] {
+export function extractWordsFromString(c: string, skipBoringWords: boolean = false): string[] {
   // @ts-ignore TODO use later compiler version
   const iterator = c.matchAll(/[A-Za-z]*/ugi)
 
@@ -68,8 +88,8 @@ export function extractWordsFromString(c: string): string[] {
 
   let nextVal = iterator.next();
   while (!nextVal.done) {
-    const value = nextVal.value[0];
-    if (value.length > 2 && !BORING_WORDS.includes(value)) {
+    const value = nextVal.value[0].toLowerCase();
+    if (value.length > 2 && (!skipBoringWords || !BORING_WORDS.includes(value))) {
       out.push(value)
     }
     nextVal = iterator.next();

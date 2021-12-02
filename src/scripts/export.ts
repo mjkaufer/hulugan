@@ -25,8 +25,8 @@ function getHashtagsFromMessages(messages: IMessage[]): string[] {
   return _.flatten(messages.map(m => extractHashtagsFromString(m.message)));
 }
 
-function getWordsFromMessages(messages: IMessage[]): string[] {
-  return _.flatten(messages.map(m => extractWordsFromString(m.message)));
+function getWordsFromMessages(messages: IMessage[], skipBoringWords: boolean): string[] {
+  return _.flatten(messages.map(m => extractWordsFromString(m.message, skipBoringWords)));
 }
 
 
@@ -53,7 +53,8 @@ function createMetrics(): IScrapedDataJSON {
   return {
     emojiCounts: catMattIterator(messages => freqMap(getEmojiFromMessages(messages))),
     hashtagCounts: catMattIterator(messages => freqMap(getHashtagsFromMessages(messages), _.toLower)),
-    wordCounts: catMattIterator(messages => freqMap(getWordsFromMessages(messages), _.toLower)),
+    interestingWordCounts: catMattIterator(messages => freqMap(getWordsFromMessages(messages, true), _.toLower)),
+    wordCounts: catMattIterator(messages => freqMap(getWordsFromMessages(messages, false), _.toLower)),
     numMessages: catMattIterator(messages => messages.length),
     numNewLines: catMattIterator(messages => getNewLinesFromMessages(messages)),
     numWords: catMattIterator(messages => getNumWordsFromMessages(messages)),

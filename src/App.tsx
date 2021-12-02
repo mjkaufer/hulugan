@@ -5,6 +5,7 @@ import { Messages } from './Messages';
 import { Competition } from './Competition';
 import { EmojiRanking } from './EmojiRanking';
 import { HashtagRanking } from './HashtagRanking';
+import { WordRanking } from './WordRanking';
 
 const useStyles = makeStyles({
   container: {
@@ -22,6 +23,7 @@ function App() {
       <Splash/>
       <Messages/>
       <Competition/>
+      <WordRanking/>
       <HashtagRanking/>
       <EmojiRanking/>
     </div>
