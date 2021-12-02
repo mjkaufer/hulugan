@@ -6,6 +6,7 @@ import { Competition } from './Competition';
 import { EmojiRanking } from './EmojiRanking';
 import { HashtagRanking } from './HashtagRanking';
 import { WordRanking } from './WordRanking';
+import { BigramRanking } from './BigramRanking';
 
 const useStyles = makeStyles({
   container: {
@@ -24,6 +25,7 @@ function App() {
       <Messages/>
       <Competition/>
       <WordRanking/>
+      <BigramRanking/>
       <HashtagRanking/>
       <EmojiRanking/>
     </div>

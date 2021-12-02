@@ -9,6 +9,8 @@ export interface IScrapedDataJSON {
   hashtagCounts: IPerPersonData<Record<string, number>>;
   interestingWordCounts: IPerPersonData<Record<string, number>>;
   wordCounts: IPerPersonData<Record<string, number>>;
+  bigramCounts: IPerPersonData<Record<string, number>>;
+  trigramCounts: IPerPersonData<Record<string, number>>;
   numMessages: IPerPersonData<number>;
   numWords: IPerPersonData<number>;
   numNewLines: IPerPersonData<number>;

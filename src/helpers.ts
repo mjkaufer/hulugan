@@ -85,14 +85,20 @@ const BORING_WORDS: string[] = [
   "i've",
   'had',
   'did',
-  'they'
+  'they',
+  'in',
+  'of',
+  'to',
+  'i',
+  'a',
+  'is',
 ];
 
 const BANNED_WORDS: string[] = [
   'https',
 ]
 
-export function extractWordsFromString(c: string, skipBoringWords: boolean = false): string[] {
+export function extractWordsFromString(c: string, skipBoringWords: boolean = false, skipTwoLetters: boolean = true): string[] {
   // @ts-ignore TODO use later compiler version
   const iterator = c.matchAll(/[A-Za-z-']*/ugi)
 
@@ -101,11 +107,64 @@ export function extractWordsFromString(c: string, skipBoringWords: boolean = fal
   let nextVal = iterator.next();
   while (!nextVal.done) {
     const value = nextVal.value[0].toLowerCase();
-    if (value.length > 2 && !BANNED_WORDS.includes(value) && (!skipBoringWords || !BORING_WORDS.includes(value))) {
+    if (value.length > (skipTwoLetters ? 2 : 0) && !BANNED_WORDS.includes(value) && (!skipBoringWords || !BORING_WORDS.includes(value))) {
       out.push(value)
     }
     nextVal = iterator.next();
   }
+
+  return out;
+}
+
+const EXCLUDE_NGRAMS = [
+  'spotify com',
+  'open spotify com',
+  'open spotify',
+  'hulu com',
+  'www hulu com',
+  'www hulu',
+  'hulu com',
+  'spotify com track',
+  'hulu com watch',
+  'spotify com playlist'
+]
+
+export function extractNGrams(c: string, n: number): string[] {
+  const words = extractWordsFromString(c, false, false);
+
+  const out: string[] = [];
+
+  /*
+    hello world, n = 2
+    hello, currIndex = 0, 0 < 1, return
+    world, currIndex = 1, !1 < 1, continue
+
+    i = -n = -2
+  */
+
+  words.forEach((w, currIndex) => {
+    if (currIndex < n - 1) {
+      return;
+    }
+
+    let word = '';
+    let isSuperBoring = true;
+    for (let i = -n + 1; i <= 0; i++) {
+      word = word + words[i + currIndex] + ' '
+      if (!BORING_WORDS.includes(words[i + currIndex])) {
+        isSuperBoring = false;
+      }
+    }
+
+    if (!isSuperBoring) {
+      word = word.trim().toLowerCase();
+  
+      
+      if (!EXCLUDE_NGRAMS.includes(word)) {
+        out.push(word)
+      }
+    }
+  })
 
   return out;
 }

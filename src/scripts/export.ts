@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as _ from 'lodash';
 import { IPerPersonData, IScrapedDataJSON } from '../dataTypes';
-import { buildMessages, IMessage, extractEmojiFromString, extractHashtagsFromString, extractNewLinesFromString, extractWordsFromString, freqMap } from '../helpers';
+import { buildMessages, IMessage, extractEmojiFromString, extractHashtagsFromString, extractNewLinesFromString, extractWordsFromString, freqMap, extractNGrams } from '../helpers';
 
 import { CSVToArray } from './lib';
 
@@ -27,6 +27,14 @@ function getHashtagsFromMessages(messages: IMessage[]): string[] {
 
 function getWordsFromMessages(messages: IMessage[], skipBoringWords: boolean): string[] {
   return _.flatten(messages.map(m => extractWordsFromString(m.message, skipBoringWords)));
+}
+
+function getBigramsFromMessages(messages: IMessage[]): string[] {
+  return _.flatten(messages.map(m => extractNGrams(m.message, 2)));
+}
+
+function getTrigramsFromMessages(messages: IMessage[]): string[] {
+  return _.flatten(messages.map(m => extractNGrams(m.message, 3)));
 }
 
 
@@ -55,6 +63,8 @@ function createMetrics(): IScrapedDataJSON {
     hashtagCounts: catMattIterator(messages => freqMap(getHashtagsFromMessages(messages), _.toLower)),
     interestingWordCounts: catMattIterator(messages => freqMap(getWordsFromMessages(messages, true), _.toLower)),
     wordCounts: catMattIterator(messages => freqMap(getWordsFromMessages(messages, false), _.toLower)),
+    bigramCounts: catMattIterator(messages => freqMap(getBigramsFromMessages(messages), _.toLower)),
+    trigramCounts: catMattIterator(messages => freqMap(getTrigramsFromMessages(messages), _.toLower)),
     numMessages: catMattIterator(messages => messages.length),
     numNewLines: catMattIterator(messages => getNewLinesFromMessages(messages)),
     numWords: catMattIterator(messages => getNumWordsFromMessages(messages)),
