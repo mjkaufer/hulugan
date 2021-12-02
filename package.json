@@ -27,7 +27,7 @@
     "build": "react-scripts build && rm -rf docs && mv build docs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "export": "tsc src/scripts/export.ts && node src/scripts/export.js && rm -rf *.js"
+    "export": "tsc src/scripts/export.ts && node src/scripts/export.js && rm -rf src/*.js"
   },
   "homepage": "./",
   "eslintConfig": {
