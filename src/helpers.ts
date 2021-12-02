@@ -78,18 +78,30 @@ const BORING_WORDS: string[] = [
   'too',
   'there',
   'like',
+  "i'm",
+  "i'll",
+  "it's",
+  "its",
+  "i've",
+  'had',
+  'did',
+  'they'
 ];
+
+const BANNED_WORDS: string[] = [
+  'https',
+]
 
 export function extractWordsFromString(c: string, skipBoringWords: boolean = false): string[] {
   // @ts-ignore TODO use later compiler version
-  const iterator = c.matchAll(/[A-Za-z]*/ugi)
+  const iterator = c.matchAll(/[A-Za-z-']*/ugi)
 
   const out: string[] = [];
 
   let nextVal = iterator.next();
   while (!nextVal.done) {
     const value = nextVal.value[0].toLowerCase();
-    if (value.length > 2 && (!skipBoringWords || !BORING_WORDS.includes(value))) {
+    if (value.length > 2 && !BANNED_WORDS.includes(value) && (!skipBoringWords || !BORING_WORDS.includes(value))) {
       out.push(value)
     }
     nextVal = iterator.next();

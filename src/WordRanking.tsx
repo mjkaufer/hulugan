@@ -37,7 +37,7 @@ export function WordRanking() {
       <br />
       <br />
 
-      <PerPersonRanking perPersonRawCounts={boring ? data.wordCounts : data.interestingWordCounts} key={boring ? 'boring' : 'interesting'} n={30} transformRow={_.startCase} />
+      <PerPersonRanking perPersonRawCounts={boring ? data.wordCounts : data.interestingWordCounts} key={boring ? 'boring' : 'interesting'} n={30} transformRow={_.capitalize} />
     </section>
   )
 }
