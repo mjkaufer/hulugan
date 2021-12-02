@@ -92,6 +92,7 @@ const BORING_WORDS: string[] = [
   'i',
   'a',
   'is',
+  'on',
 ];
 
 const BANNED_WORDS: string[] = [
